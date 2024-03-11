@@ -1,0 +1,63 @@
+// Define your MongoDB datasource
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Generate Prisma client
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the User model
+model User {
+  id                   String       @id @default(auto()) @map("_id") @db.ObjectId
+  userNo               String?      @unique
+  email                String       @unique
+  files                File[]
+  messages             Message[]
+  stripeCustomerId     String?      @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId String?      @unique @map(name: "stripe_subscription_id")
+  stripePriceId        String?      @unique @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_id")
+}
+
+// UploadStatus enum
+enum UploadStatus {
+  PENDING
+  PROCESSING
+  FAILED
+  SUCCESS
+}
+
+// Define the File model
+model File {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  uploadStatus  UploadStatus @default(PENDING)
+  url           String
+  key           String
+  messages      Message[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  
+  user          User?        @relation(fields: [userNo], references: [userNo])
+  userNo        String?      // Make userId optional
+}
+
+
+// Define the Message model
+model Message {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  text           String       // Change @db.Text() to String
+  isUserMessage  Boolean
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  
+  user           User?        @relation(fields: [userNo], references: [userNo])
+  userNo         String?
+
+  file           File?        @relation(fields: [fileId], references: [id])
+  fileId         String?
+}
+
