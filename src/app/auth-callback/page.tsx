@@ -1,12 +1,13 @@
 "use client"
 
-import { useSearchParams, useRouter } from "next/navigation";
+import {useRouter, useSearchParams } from "next/navigation";
 import { trpc } from "../_trpc/client";
 import { Loader2 } from "lucide-react";
 
+
 const Page = () => {
   const router = useRouter();
-
+  
   const searchParams = useSearchParams();
   const origin = searchParams.get('origin');  // origin = dashboard from the query parameters
 
@@ -33,4 +34,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Page

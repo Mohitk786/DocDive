@@ -35,7 +35,6 @@ const Page = async({params}:PageProps) => {
 
     if(!file) notFound()
 
-    console.log("this is what", file);
 
 
 
