@@ -21,10 +21,11 @@ const Messages = ({fileId}:MessagesProps) => {
                 fileId,
                 limit: INFINITE_QUERY_LIMIT,
                 }, {
-                    getNextPageParam: (lastPage) => lastPage?.nextCursor, 
-                    keepPreviousData: true
+                    getNextPageParam: (lastPage) => 
+                    lastPage?.nextCursor, 
                     
-                })
+                }
+    )
     
 
     const messages = data?.pages.flatMap((page)=>page.messages)
