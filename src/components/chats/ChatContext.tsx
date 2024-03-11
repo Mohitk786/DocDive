@@ -52,7 +52,7 @@ export const ChatContextProvider = ({fileId, children}:Props)=>{
         },
         onMutate: async ({message})=>{
             
-            backupMessage.current = message
+            backupMessage.current= message.toString()
             setMessage('')
             
             //step 1
@@ -79,7 +79,7 @@ export const ChatContextProvider = ({fileId, children}:Props)=>{
                         {
                             createdAt: new Date().toISOString(),
                             id:crypto.randomUUID(),
-                            text : message,
+                            text : message.toString(),
                             isUserMessage: true,
                         },
 
