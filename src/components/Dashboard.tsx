@@ -8,12 +8,19 @@ import Link from "next/link"
 import {format} from "date-fns"
 import { Button } from "./ui/button"
 import { useState } from "react"
+import { getUserSubscriptionPlan } from "@/lib/stripe"
 
-const Dashboard = () =>{
+
+interface PageProps{
+    subscriptionPlan : Awaited<ReturnType<typeof getUserSubscriptionPlan>>
+}
+
+
+const Dashboard = ({subscriptionPlan}:{subscriptionPlan:PageProps}) =>{
     
     const [currentDeletingFile, setcurrentDeletingFile] = useState<string | null>(null)
 
-    const utils = trpc.useContext()
+    const utils = trpc.useUtils()
     const {data:files, isLoading} = trpc.getUserFiles.useQuery() 
 
     //if we invoke mutate anywhere inside the component deleteFile will get executed
@@ -36,7 +43,7 @@ const Dashboard = () =>{
             <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0">
                 <h1 className="mb-3 font-bold text-gray-900 text-5xl">My Files</h1>
             </div>
-                <UploadButton />
+                <UploadButton isSubscribed={subscriptionPlan.isSubscribed}/>
 
             {/* display all user files */}
             {

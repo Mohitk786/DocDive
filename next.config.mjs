@@ -1,6 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 
+    async redirects(){
+      return [
+        {
+          source:"/sign-in",
+          destination: "/api/auth/login",
+          permanent:true
+        },
+        {
+          source:"/sign-up",
+          destination: "/api/auth/register",
+          permanent:true
+        }
+      ]
+    },
+
     //webpack is written becase pdf renderer was not working
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         config.resolve.alias['canvas'] = false;
@@ -8,8 +23,8 @@ const nextConfig = {
         return config;
       },
       images: {
-        domains: [
-          'lh3.googleusercontent.com',
+        remotePatterns: [
+          {hostname:'lh3.googleusercontent.com'},
         ],
       },
       experimental: {
