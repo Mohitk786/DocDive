@@ -28,18 +28,16 @@ export const appRouter = router({
       }
     });
 
-    console.log(dbUser?.id)
 
     //If user is not in DB it means it is new user so add it to DB
     if (!dbUser) {
-      const newU = await db.user.create({
+      const newUser = await db.user.create({
         data: {
           email: user.email,
-          userNo: user?.id
+          userNo: user.id
         }
       });
 
-      console.log("User created in the database:", newU);
     }
 
     return { success: true };

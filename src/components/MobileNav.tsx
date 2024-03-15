@@ -71,10 +71,10 @@ const MobileNav = ({isAuth}:{isAuth:boolean}) => {
                                     <li className="my-3 h-px w-full bg-gray-300"/>
 
                                     <li>
-                                        <Link 
-                                            href="/sign-out" className="flex items-center w-full font-semibold" >
+                                        <Link
+                                            href="sign-out" className="flex items-center w-full font-semibold" >
                                             Sign Out
-                                    </Link>
+                                        </Link>
                                 </li>
                                 </>
                             )}
