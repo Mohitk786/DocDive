@@ -16,7 +16,7 @@ interface PageProps{
 }
 
 
-const Dashboard = ({subscriptionPlan}:{subscriptionPlan:PageProps}) =>{
+const Dashboard = ({subscriptionPlan}:PageProps) =>{
     
     const [currentDeletingFile, setcurrentDeletingFile] = useState<string | null>(null)
 
