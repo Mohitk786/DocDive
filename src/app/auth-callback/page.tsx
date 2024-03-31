@@ -9,10 +9,11 @@ const Page = () => {
   const router = useRouter();
   
   const searchParams = useSearchParams();
-  const origin = searchParams.get('origin');  // origin = dashboard from the query parameters
+  const origin =  searchParams.get('origin');  // origin = dashboard from the query parameters
 
 
-  const {error, isError, isSuccess} =  trpc.authCallback.useQuery()
+  const {error, isError, isSuccess} =   trpc.authCallback.useQuery()
+
   if(isSuccess){
     router.push(origin ? `/${origin}`: '/dashboard')
   }

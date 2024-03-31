@@ -30,15 +30,22 @@ export const appRouter = router({
 
 
     //If user is not in DB it means it is new user so add it to DB
-    if (!dbUser) {
-      const newUser = await db.user.create({
-        data: {
-          email: user.email,
-          userNo: user.id
-        }
-      });
-
+    try{
+      if (!dbUser) {
+        console.log("creating user")
+        const newUser = await db.user.create({
+          data: {
+            email: user.email,
+            userNo: user.id,
+            
+          }
+        });
+        console.log("entry ban gayi",newUser);
+      }
+    }catch(err){
+      console.log("error", err);
     }
+
 
     return { success: true };
   }),

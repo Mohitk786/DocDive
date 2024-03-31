@@ -2,7 +2,7 @@
 
 import { ArrowRight, Menu } from "lucide-react"
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, redirect } from "next/navigation";
 import { useEffect, useState } from "react"
 
 const MobileNav = ({isAuth}:{isAuth:boolean}) => {
@@ -70,12 +70,12 @@ const MobileNav = ({isAuth}:{isAuth:boolean}) => {
                                     </li>
                                     <li className="my-3 h-px w-full bg-gray-300"/>
 
-                                    <li>
-                                        <Link
-                                            href="sign-out" className="flex items-center w-full font-semibold" >
+                                    <li onClick={()=>redirect("/sign-out")}>
+                                        <span
+                                            className="flex items-center w-full font-semibold" >
                                             Sign Out
-                                        </Link>
-                                </li>
+                                        </span>
+                                    </li>
                                 </>
                             )}
                         </ul>

@@ -18,7 +18,7 @@ const Page = async({params}:PageProps) => {
     //retrieve the file id
     const {file_id} = params;
 
-    const {getUser} = getKindeServerSession()
+    const {getUser} =  getKindeServerSession()
     const user = await getUser()
 
     if(!user || !user.id){

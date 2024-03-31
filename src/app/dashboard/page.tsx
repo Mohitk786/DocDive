@@ -11,16 +11,18 @@ const Page = async () =>{
 
 
     if(!user || !user.email || !user.id) redirect('/auth-callback?origin=dashboard')
-    const userId = user.id
+    const userId =  user.id
     const dbUser = await db.user.findFirst({
         where:{
             userNo: userId
         }
     })
 
+    console.log("dashboard", dbUser)
     //reverify if user is added to DB or not
     if(!dbUser) redirect('/auth-callback?origin=dashboard')
     const subscriptionPlan = await getUserSubscriptionPlan()
+console.log("subscriptionPlan",subscriptionPlan);
 
 
     return (
